@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next'
+import Link from 'next/link'
 
 export interface PostsPageProps {
   posts: any[]
@@ -11,7 +12,11 @@ export default function PostsPage({ posts }: PostsPageProps) {
 
       <ul>
         {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
+          <li key={post.id}>
+            <Link href={`/demo/posts/${post.id}`}>
+              <a>{post.title}</a>
+            </Link>
+          </li>
         ))}
       </ul>
     </>
@@ -26,11 +31,9 @@ export const getStaticProps: GetStaticProps<PostsPageProps> = async (
   const res = await fetch('https://js-post-api.herokuapp.com/api/posts?_page=1')
   const data = await res.json()
 
-  console.log(data);
-
   return {
     props: {
-      posts: data.data.map((i: any) => ({id: i.id, title: i.title})),
+      posts: data.data.map((i: any) => ({ id: i.id, title: i.title })),
     },
   }
 }
