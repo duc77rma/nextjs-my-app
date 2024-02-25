@@ -1,3 +1,4 @@
+import { MainLayout } from '@/components/layout'
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import Link from 'next/link'
 
@@ -5,23 +6,26 @@ export interface PostsPageProps {
   posts: any[]
 }
 
-export default function PostsPage({ posts }: PostsPageProps) {
+function PostsPage({ posts }: PostsPageProps) {
   return (
-    <>
+    <MainLayout>
       <h1>Posts Page</h1>
 
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <Link href={`/demo/posts/${post.id}`}>
+            <Link legacyBehavior href={`/demo/posts/${post.id}`}>
               <a>{post.title}</a>
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </MainLayout>
   )
 }
+
+PostsPage.Layout = MainLayout;
+export default PostsPage
 
 export const getStaticProps: GetStaticProps<PostsPageProps> = async (
   context: GetStaticPropsContext
