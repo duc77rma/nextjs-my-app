@@ -8,7 +8,7 @@ export const config = {
   }
 }
 
-const proxy = httpProxy.createProxyServer()
+const proxy = httpProxy.createProxyServer({}) 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   return new Promise((resolve) => {
@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
     const cookies = new Cookies(req, res)
     const accessToken = cookies.get('access_token')
     if (accessToken) {
-      req.headers.authorization = `Bearer ${accessToken}`
+      req.headers.Authorization = `Bearer ${accessToken}`
     }
 
     // don't send cookies to API server

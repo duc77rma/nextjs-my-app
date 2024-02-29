@@ -18,7 +18,9 @@
       "@/components/*": ["./components/*"],
       "@/styles/*": ["./styles/*"],
       "@/models/*": ["./models/*"],
-      "@/common/*": ["./common/*"]
+      "@/common/*": ["./common/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/api/*": ["./api-client/*"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

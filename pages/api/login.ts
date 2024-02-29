@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import httpProxy, { ProxyResCallback } from 'http-proxy'
 import Cookies from 'cookies'
+import { log } from 'console'
 
 type Data = {
   message: string
@@ -12,7 +13,7 @@ export const config = {
   }
 }
 
-const proxy = httpProxy.createProxyServer()
+const proxy = httpProxy.createProxyServer({}) 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method !== 'POST') {
@@ -33,9 +34,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         try {
           const { accessToken, expiredAt } = JSON.parse(body)
 
+          console.log("accessToken: ", accessToken);
+          
+
           // convert token to cookies
           const cookies = new Cookies(req, res, { secure: process.env.NODE_ENV !== 'development' })
-          cookies.set('accessToken', accessToken, {
+          cookies.set('access_token', accessToken, {
             httpOnly: true,
             sameSite: 'lax',
             expires: new Date(expiredAt)
