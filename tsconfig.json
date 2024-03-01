@@ -20,7 +20,8 @@
       "@/models/*": ["./models/*"],
       "@/common/*": ["./common/*"],
       "@/hooks/*": ["./hooks/*"],
-      "@/api/*": ["./api-client/*"]
+      "@/api/*": ["./api-client/*"],
+      "@/utils/*": ["./utils/*"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
